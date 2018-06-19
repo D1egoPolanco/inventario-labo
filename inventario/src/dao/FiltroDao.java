@@ -25,7 +25,7 @@ private static final String SQL_INSERT="INSERT INTO filtros_aceite(codFiltro,Mar
 private static final String SQL_UPDATE="Update filtros_aceite SET marca =?,Stock=?,existencia=?WHERE codFiltro=?";
 private static final String SQL_DELETE="DELETE FROM filtros_aceite WHERE codFiltro=?";
 private static final String SQL_READ="SELECT* FROM filtros_aceite WHERE codFiltro=?";
-private static final String SQL_REDALL="select *FROM filtros_aceite";
+private static final String SQL_REDALL="SELECT *FROM filtros_aceite";
 
 private static final Conexion con=Conexion.conectar();
     @Override
@@ -105,10 +105,13 @@ private static final Conexion con=Conexion.conectar();
         Statement s;
         ResultSet rs;
         try{
-            s=con.getCnx().prepareStatement(SQL_READALL);
-            rs=s.
-        }
-        
+            s=con.getCnx().prepareStatement(SQL_REDALL);
+            rs=s.executeQuery(SQL_READ);
+            
+        } catch (SQLException ex) {
+        Logger.getLogger(FiltroDao.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        return all;
     }
     
     
